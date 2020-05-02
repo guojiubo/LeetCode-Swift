@@ -24,24 +24,17 @@ import XCTest
 
 class P49: XCTestCase {
 
-    // "abcccc" -> "#1#1#4#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0"
-    func customHash(_ s: String) -> String {
-        var bucket = Array(repeating: 0, count: 26)
-        for c in s {
-            let start = Character("a").asciiValue!
-            let index = Int(c.asciiValue! - start)
-            bucket[index] += 1
-        }
-        return bucket.reduce("", { "\($0)#\($1)" })
-    }
-    
+    // "abcccc" -> [1,1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0] as key
     func groupAnagrams(_ strs: [String]) -> [[String]] {
-        var map: [String: [String]] = [:]
+        var map: [[Int]: [String]] = [:]
         for s in strs {
-            let key = customHash(s)
+            var key = Array(repeating: 0, count: 26)
+            for c in s {
+                key[Int(c.asciiValue! - 97)] += 1
+            }
             map[key, default: []].append(s)
         }
-        return map.values.map{ $0 }
+        return Array(map.values)
     }
     
     func test() {
