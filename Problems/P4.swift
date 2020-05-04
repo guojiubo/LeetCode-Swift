@@ -65,7 +65,7 @@ class P4: XCTestCase {
     }
     
     // exclude k/2 elements every time
-    // log(m + n)
+    // O(log(m + n))
     func findKthSmallest(_ nums1: [Int], _ start1: Int, _ end1: Int, _ nums2: [Int], _ start2: Int, _ end2: Int, _ k: Int) -> Double {
         let len1 = end1 - start1 + 1
         let len2 = end2 - start2 + 1
@@ -118,7 +118,7 @@ class P4: XCTestCase {
         for testcase in cases {
             let nums1 = testcase.0
             let nums2 = testcase.1
-            XCTAssertEqual(findMedianSortedArrays(nums1, nums2) == testcase.2)
+            XCTAssertEqual(findMedianSortedArrays(nums1, nums2), testcase.2)
         }
     }
     
@@ -126,7 +126,7 @@ class P4: XCTestCase {
         for testcase in cases {
             let nums1 = testcase.0
             let nums2 = testcase.1
-            XCTAssertEqual(findMedianSortedArrays2(nums1, nums2) == testcase.2)
+            XCTAssertEqual(findMedianSortedArrays2(nums1, nums2), testcase.2)
         }
     }
     
