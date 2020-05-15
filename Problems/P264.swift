@@ -22,6 +22,11 @@ import XCTest
 
 class P264: XCTestCase {
 
+    //  three ways merge
+    //  i2: 1*2, 2*2, 3*2, 4*2, 5*2, ...
+    //  i3: 1*3, 2*3, 3*3, 4*3, 5*3, ...
+    //  i5: 1*5, 2*5, 3*5, 4*5, 5*5, ...
+    //  move every pointer when equal
     func nthUglyNumber(_ n: Int) -> Int {
         var nums = Array(repeating: 1, count: n)
         var i2 = 0, i3 = 0, i5 = 0
