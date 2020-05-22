@@ -32,20 +32,25 @@ class P137: XCTestCase {
     //     0 1 3 4
     // %3: 0 1 0 1
     func singleNumber(_ nums: [Int]) -> Int {
-        var single = 0
-        for i in 0..<32 {
-            var count = 0
-            for n in nums {
-                count += (n >> i) & 1
+        var counts = Array(repeating: 0, count:32)
+        for var num in nums {
+            for i in 0..<32 {
+                counts[i] += num & 1
+                num >>= 1
             }
-            single ^= (count % 3) << i
         }
-        return single
+        var single: Int32 = 0
+        for i in 0..<32 {
+            single <<= 1
+            single |= Int32(counts[31 - i] % 3)
+        }
+        return Int(single)
     }
     
     func testSingleNumber() {
         XCTAssertEqual(singleNumber([2,2,3,2]), 3)
         XCTAssertEqual(singleNumber([0,1,0,1,0,1,99]), 99)
+        XCTAssertEqual(singleNumber([-2,-2,1,1,-3,1,-3,-3,-4,-2]), -4)
     }
 
 }
